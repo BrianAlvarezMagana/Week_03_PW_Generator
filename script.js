@@ -14,7 +14,7 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 
-// First we outline a pool of the usable characters
+// First we outline and seperate by groups the pool of the usable characters
 const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
 const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbers = '0123456789';
@@ -24,6 +24,7 @@ const specialCharacters = '!@#$%^&*()_+-=[]{}|;:,.<>?';
 function generatePassword () {
 let passwordLength = prompt('How long would you like your password? (Choose a length from 8 - 64 characters)');
 
+//Converts to numeric value -- If statement checks length to validate it is of acceptable length
 passwordLength = parseInt(passwordLength);
 if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 64 ) {
 alert('Please choose a valid length!');
@@ -36,6 +37,7 @@ let useLowercase = confirm('Include lowercase letters?');
   let useNumbers = confirm('Include numbers?');
   let useSpecialCharacters = confirm('Include special characters?');
 
+  //Variable to store value of what pool(s) to use
   let characterSet = '';
   if (useLowercase) {
     characterSet += lowercaseLetters;
@@ -50,13 +52,13 @@ let useLowercase = confirm('Include lowercase letters?');
     characterSet += specialCharacters;
   }
 
-  // Check that at least one character set is selected via the prompts
+  // Checks that at least one character set is selected via the prompts
   if (characterSet === '') {
     alert('Please select at least one character set!');
     return '';
   }
 
-  // Generate password
+  // Generate password using math functions that are built in based on length of Password
   let password = '';
   for (let i = 0; i < passwordLength; i++) {
     let randomIndex = Math.floor(Math.random() * characterSet.length);
